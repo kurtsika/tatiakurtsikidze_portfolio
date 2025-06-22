@@ -49,9 +49,12 @@
         {% for post in site.posts %}
         <div class="col col-4 col-d-6 col-t-12">
           <div class="portfolio__item">
-            <a href="{{post.url}}" class="portfolio__link" data-glightbox='title: {{photo.title}}; description: {{photo.description}}; descPosition: bottom;'>
+            <a href="{{post.url}}" class="portfolio__link" data-glightbox='title: {{post.title}}; description: {{post.description}}; descPosition: bottom;'>
               <span class="portfolio__icon"><i class="ion ion-ios-eye"></i></span>
-              <img data-src="{{post.image}}" class="portfolio__image lazy" alt="{{photo.title}}">
+              <video class="portfolio__video lazy" autoplay muted loop playsinline>
+                <source data-src="{{post.video}}" type="video/mp4">
+                <img data-src="{{post.image}}" class="portfolio__image lazy" alt="{{post.title}}">
+              </video>
             </a>
            </div>
         </div>

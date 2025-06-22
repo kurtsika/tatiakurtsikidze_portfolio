@@ -3,7 +3,14 @@
 
     <div class="article__head">
       <time class="article__date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date_to_string }}</time>
-      {% if post.image %}
+      {% if post.video %}
+      <a class="article__image" href="{{post.url | prepend: site.baseurl}}">
+        <video class="lazy" autoplay muted loop playsinline>
+          <source data-src="{{site.baseurl}}{{post.video}}" type="video/mp4">
+          <img data-src="{{site.baseurl}}{{post.image}}" class="lazy" alt="{{post.title}}">
+        </video>
+      </a>
+      {% elsif post.image %}
       <a class="article__image" href="{{post.url | prepend: site.baseurl}}">
         <img class="lazy" data-src="{{site.baseurl}}{{post.image}}" alt="{{post.title}}">
       </a>
