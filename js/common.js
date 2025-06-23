@@ -6,12 +6,11 @@ document.addEventListener("DOMContentLoaded", function() {
     menuCloseIcon = document.querySelector(".nav__icon-close"),
     menuList = document.querySelector(".main-nav"),
     toggleTheme = document.querySelector(".toggle-theme"),
-    portfolioViewButton = document.querySelector('.portfolio__toggle'),
     btnScrollToTop = document.querySelector(".top");
 
 
   /* =======================================================
-  // Menu + Theme Switcher + Toggle list view
+  // Menu + Theme Switcher
   ======================================================= */
   menuOpenIcon.addEventListener("click", () => {
     menuOpen();
@@ -24,12 +23,6 @@ document.addEventListener("DOMContentLoaded", function() {
   toggleTheme.addEventListener("click", () => {
     darkMode();
   });
-
-  if (portfolioViewButton) {
-    portfolioViewButton.addEventListener("click", () => {
-      viewToggle();
-    });
-  }
 
   function menuOpen() {
     menuList.classList.add("is-open");
@@ -53,19 +46,28 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
+  // Scroll to top
+  if (btnScrollToTop) {
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 50) {
+        btnScrollToTop.classList.add("is-visible");
+      } else {
+        btnScrollToTop.classList.remove("is-visible");
+      }
+    });
 
-  // Toggle list view
-  function viewToggle() {
-    if (html.classList.contains('view-list')) {
-      html.classList.remove('view-list');
-      localStorage.removeItem("classView");
-      document.documentElement.removeAttribute("list");
-    } else {
-      html.classList.add('view-list');
-      localStorage.setItem("classView", "list");
-      document.documentElement.setAttribute("list", "");
-    }
+    btnScrollToTop.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.scrollTo({top: 0, behavior: "smooth"});
+    });
   }
+
+  // On page load
+  window.addEventListener('load', () => {
+    if (window.pageYOffset > 50) {
+      btnScrollToTop.classList.add("is-visible");
+    }
+  });
 
 
   /* =======================
@@ -123,24 +125,6 @@ document.addEventListener("DOMContentLoaded", function() {
         behavior: "smooth"
       });
     });
-  });
-
-
-  /* =======================
-  // Scroll Top Button
-  ======================= */
-  window.addEventListener("scroll", function () {
-    window.scrollY > window.innerHeight ? btnScrollToTop.classList.add("is-active") : btnScrollToTop.classList.remove("is-active");
-  });
-
-  btnScrollToTop.addEventListener("click", function () {
-    if (window.scrollY != 0) {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "smooth"
-      })
-    }
   });
 
 });
